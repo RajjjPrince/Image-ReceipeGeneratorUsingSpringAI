@@ -30,7 +30,7 @@ public class ChatService {
 
 
 // Recommended
-        String outputText = response.getResult().getOutput().getCotent();
+        String outputText = response.getResult().getOutput().getText();
         return outputText;
 
 

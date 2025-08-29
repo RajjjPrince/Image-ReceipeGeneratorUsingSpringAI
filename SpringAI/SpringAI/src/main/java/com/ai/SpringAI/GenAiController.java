@@ -15,12 +15,20 @@ import java.util.stream.Collectors;
 public class GenAiController<quality> {
 
     ChatService chatService;
+    RecipeService recipeService;
+    ImageService imageService;
+
+    public GenAiController(RecipeService recipeService) {
+        this.recipeService = recipeService;
+    }
+
+
 
     public GenAiController(ImageService imageService) {
         this.imageService = imageService;
     }
 
-    ImageService imageService;
+
 
     public GenAiController(ChatService chatService) {
         this.chatService = chatService;
@@ -61,6 +69,17 @@ public class GenAiController<quality> {
                                  .collect(Collectors.toList());
          return imageUrl;
 
+
+
+
+    }
+
+
+    @GetMapping("recipe-creator")
+    public String recipeCreator(@RequestParam String ingredients,
+                                @RequestParam(defaultValue = "any") String cuisine,
+                                @RequestParam(defaultValue = "") String dietRestrictions){
+            return recipeService.createRecipe(ingredients,cuisine,dietRestrictions);
     }
 
 }
